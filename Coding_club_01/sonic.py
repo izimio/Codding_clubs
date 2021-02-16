@@ -14,6 +14,7 @@ def main():
     pos_x_2 = 0 
     pos_x_3 = 400
     pos_y_3 = 400
+    trigg = 0
     display_surface = pygame.display.set_mode((X, Y )) 
     pygame.display.set_caption('Le Rêve de Robotnik ') 
     bg_fix = pygame.image.load('./resources/background_fix.png')
@@ -36,10 +37,22 @@ def main():
 
         if keys_pressed[pygame.K_RIGHT]:
             pos_x_3 += 20
-            rect.left = 175
-            rect.top = 175
-            if pos_x_3 <= -100 :
-                pos_x_3 = 1200
+            if rect.left < 600:
+                rect.left += 175
+            if rect.left >= 600 and trigg == 0: 
+                rect.top = 175
+                rect.left = 0
+                trigg = 1
+            if rect.left >= 600 and trigg == 1: 
+                rect.top = 350
+                rect.left = 0
+                
+            if pos_x_3 >= 1200 :
+                pos_x_3 = -100
+        else :
+            rect.top = 0
+            rect.left = 1050
+            trigg = 0
         if keys_pressed[pygame.K_LEFT]:
             pos_x_3 -= 20
             rect.left = 175
